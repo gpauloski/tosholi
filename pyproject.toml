@@ -3,13 +3,13 @@ requires = ["setuptools>=64.0", "setuptools_scm"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "foobar"
+name = "tosholi"
 version = "0.1.0"
 authors = [
-    {name = "foobar author"},
-    {email = "foobar@foobar.com"},
+    {name = "Greg Pauloski"},
+    {email = "jgpauloski@uchicago.edu"},
 ]
-description = "Foobar example package."
+description = "Parse TOML files as dataclasses."
 readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
@@ -20,13 +20,12 @@ classifiers = [
     "Programming Language :: Python :: Implementation :: CPython",
 ]
 dependencies = [
-    "requests",
+    "tomli ; python_version<'3.11'",
+    "tomli-w",
 ]
 
 [project.urls]
-homepage = "https://github.com/foobar-author/foobar"
-documentation = "https://foobar.readthedocs.io"
-repository = "https://github.com/foobar-author/foobar"
+homepage = "https://github.com/gpauloski/tosholi"
 
 [project.optional-dependencies]
 dev = [
@@ -40,15 +39,6 @@ dev = [
     "ruff",
     "tox",
     "virtualenv",
-]
-docs = [
-    "black",
-    "mkdocs-gen-files",
-    "mkdocs-literate-nav",
-    "mkdocs-material",
-    "mkdocs-section-index",
-    "mkdocstrings[python]",
-    "mike",
 ]
 
 [tool.black]
@@ -68,7 +58,6 @@ dist,
 
 [tool.coverage.run]
 plugins = ["covdefaults"]
-omit = ["examples"]
 
 [tool.mypy]
 python_version = "3.10"
@@ -139,12 +128,12 @@ multiline-quotes = "single"
 
 [tool.ruff.isort]
 force-single-line = true
-known-first-party = ["foobar", "test", "testing"]
+known-first-party = ["tosholi", "test", "testing"]
 order-by-type = false
 required-imports = ["from __future__ import annotations"]
 
 [tool.ruff.per-file-ignores]
-"*/__init__.py" = ["F401"]
+"*/__init__.py" = ["D104", "F401"]
 "*/*_test.py" = ["D10"]
 
 [tool.ruff.pydocstyle]
