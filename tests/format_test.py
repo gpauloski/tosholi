@@ -59,5 +59,23 @@ def test_dump(tmp_path: pathlib.Path) -> None:
         assert f.read() == TEST_CONFIG_REPR
 
 
+def test_dump_drops_none_values(tmp_path: pathlib.Path) -> None:
+    filepath = tmp_path / 'test.toml'
+
+    @dataclasses.dataclass
+    class _Config:
+        field1: str | None = None
+        field2: str = 'abc'
+
+    with open(filepath, 'wb') as fw:
+        dump(_Config(), fw)
+
+    with open(filepath) as fr:
+        data = fr.read()
+
+    assert 'field1' not in data
+    assert 'field2' in data
+
+
 def test_dumps() -> None:
     assert dumps(TEST_CONFIG) == TEST_CONFIG_REPR
