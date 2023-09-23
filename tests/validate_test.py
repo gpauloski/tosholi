@@ -151,10 +151,11 @@ def test_validate() -> None:
         field4: Tuple[Union[str, int], ...]  # noqa: UP006, UP007
         field5: Set[float]  # noqa: UP006
 
-    assert validate(_ClassA)
+    validate(_ClassA)
 
     @dataclasses.dataclass
     class _ClassB:
         field1: bytes
 
-    assert not validate(_ClassB)
+    with pytest.raises(TypeError, match='bytes'):
+        validate(_ClassB)

@@ -174,7 +174,7 @@ def is_union(t: TypeLike) -> bool:
     return False
 
 
-def validate(model: type[DataClassProtocol]) -> bool:
+def validate(model: type[DataClassProtocol]) -> None:
     """Validate a Data Class type is TOML compatible.
 
     Python's TOML parsing supports a limited number of Python types described
@@ -185,8 +185,13 @@ def validate(model: type[DataClassProtocol]) -> bool:
     Args:
         model: Data Class type to validate.
 
-    Returns:
-        True if the model contains only support TOML types.
+    Raises:
+        TypeError: if `model` contains a non-TOML compatible type.
     """
     all_types = get_types(model)
-    return all_types.issubset(TomlTypes)
+    remainder = all_types - TomlTypes
+    if len(remainder) > 0:
+        raise TypeError(
+            f'{model.__name__} contains the following non-TOML compatible '
+            f'types: {", ".join(str(t) for t in remainder)}',
+        )
