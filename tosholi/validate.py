@@ -24,6 +24,8 @@ TomlTypes = {
     typing.Dict,
     DataClassProtocol,
     # Other types
+    typing.Any,
+    typing.Literal,
     typing.Optional,
     typing.Union,
 }
@@ -61,6 +63,10 @@ def get_types(cls: TypeLike) -> set[TypeLike]:
             types.add(DataClassProtocol)
             for field in get_dataclass_fields(cls):  # type: ignore[arg-type]
                 _recurse(field)
+        elif is_literal(cls):
+            types.add(typing.Literal)
+            for arg in typing.get_args(cls):
+                _recurse(type(arg))
         elif is_optional(cls):
             types.add(typing.Optional)
             args = typing.get_args(cls)
@@ -109,6 +115,12 @@ def is_dict(t: TypeLike) -> bool:
         )
     except TypeError:
         return t in (dict, defaultdict, typing.Dict, typing.DefaultDict)
+
+
+def is_literal(t: TypeLike) -> bool:
+    """Check is type is literal."""
+    origin = typing.get_origin(t)
+    return t is typing.Literal or origin is typing.Literal
 
 
 def is_list(t: TypeLike) -> bool:

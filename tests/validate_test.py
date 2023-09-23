@@ -5,6 +5,7 @@ import sys
 from typing import Any
 from typing import Dict
 from typing import List
+from typing import Literal
 from typing import Optional
 from typing import Set
 from typing import Tuple
@@ -17,6 +18,7 @@ from tosholi.validate import get_dataclass_fields
 from tosholi.validate import get_types
 from tosholi.validate import is_dict
 from tosholi.validate import is_list
+from tosholi.validate import is_literal
 from tosholi.validate import is_optional
 from tosholi.validate import is_set
 from tosholi.validate import is_tuple
@@ -39,6 +41,7 @@ def test_get_dataclass_fields() -> None:
     (
         (Optional[str], {Optional, str}),
         (Union[str, int], {Union, str, int}),
+        (Literal['abc', True], {Literal, str, bool}),
         (List[str], {List, str}),
         (Set[str], {Set, str}),
         (Tuple[str, int], {Tuple, str, int}),
@@ -97,6 +100,12 @@ def test_is_dict() -> None:
     if sys.version_info >= (3, 9):  # pragma: >=3.9 cover
         assert is_dict(dict[str, str])
         assert is_dict(dict)
+
+
+def test_is_literal() -> None:
+    assert is_literal(Literal)
+    assert is_literal(Literal['abc'])
+    assert not is_literal(str)
 
 
 def test_is_list() -> None:
