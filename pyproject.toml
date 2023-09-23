@@ -116,7 +116,7 @@ select = [
     # ruff-specific
     "RUF",
 ]
-extend-ignore = []
+extend-ignore = ["D100"]
 target-version = "py38"
 
 [tool.ruff.flake8-pytest-style]
