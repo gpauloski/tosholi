@@ -63,7 +63,7 @@ EXAMPLE_CONFIG = Config(
     },
 )
 
-EXAMPLE_CONFIG_TOML = '''\
+EXAMPLE_CONFIG_TOML = """\
 title = "TOML Example"
 
 [owner]
@@ -84,7 +84,7 @@ role = "frontend"
 [servers.beta]
 ip = "10.0.0.2"
 role = "backend"
-'''
+"""
 
 
 def test_load(tmp_path: pathlib.Path) -> None:
