@@ -34,7 +34,7 @@ TEST_CONFIG = _Config(
     section=_Section(subsection=_Subsection(42.0, 'test'), values=[1, 2, 3]),
 )
 TEST_CONFIG_DICT = dataclasses.asdict(TEST_CONFIG)
-TEST_CONFIG_REPR = '''\
+TEST_CONFIG_REPR = """\
 option1 = true
 option2 = false
 
@@ -48,7 +48,7 @@ values = [
 [section.subsection]
 field1 = 42.0
 field2 = "test"
-'''
+"""
 
 
 def test_load(tmp_path: pathlib.Path) -> None:
