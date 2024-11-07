@@ -116,7 +116,7 @@ select = [
     # ruff-specific
     "RUF",
 ]
-extend-ignore = ["D100"]
+extend-ignore = ["D100", "UP006", "UP007", "UP035"]
 
 [tool.ruff.format]
 indent-style = "space"

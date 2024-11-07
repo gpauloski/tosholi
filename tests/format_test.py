@@ -17,7 +17,7 @@ class _Subsection:
 @dataclasses.dataclass
 class _Section:
     subsection: _Subsection
-    values: List[int]  # noqa: UP006
+    values: List[int]
 
 
 @dataclasses.dataclass
