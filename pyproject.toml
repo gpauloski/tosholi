@@ -11,7 +11,7 @@ authors = [
 ]
 description = "Read and write TOML config files with dataclasses."
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.9"
 license = {text = "MIT"}
 classifiers = [
     "License :: OSI Approved :: MIT License",
@@ -56,7 +56,7 @@ dist,
 plugins = ["covdefaults"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 check_untyped_defs = true
 disallow_any_generics = true
 disallow_incomplete_defs = true
@@ -78,7 +78,7 @@ allow_untyped_defs = true
 
 [tool.ruff]
 line-length = 79
-target-version = "py38"
+target-version = "py39"
 
 [tool.ruff.lint]
 # See all rules here: https://beta.ruff.rs/docs/rules
@@ -116,7 +116,7 @@ select = [
     # ruff-specific
     "RUF",
 ]
-extend-ignore = ["D100"]
+extend-ignore = ["D100", "UP006", "UP007", "UP035"]
 
 [tool.ruff.format]
 indent-style = "space"

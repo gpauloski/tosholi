@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 import sys
+from collections.abc import Mapping
 from typing import Any
 from typing import BinaryIO
-from typing import Mapping
 from typing import TypeVar
 
 import dacite

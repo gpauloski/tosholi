@@ -30,7 +30,7 @@ def test_get_dataclass_fields() -> None:
     @dataclasses.dataclass
     class _ClassA:
         field1: int
-        field2: Union[str, int]  # noqa: UP007
+        field2: Union[str, int]
         field3 = None
 
     assert get_dataclass_fields(_ClassA) == {int, Union[str, int]}
@@ -57,10 +57,10 @@ def test_get_types_basic(t: Any, expected: set[Any]) -> None:
 class _ClassA:
     field1: int
     field2: str
-    field3: List[Optional[str]]  # noqa: UP006, UP007
-    field4: Dict[str, int]  # noqa: UP006
-    field5: Tuple[Union[bytes, str], ...]  # noqa: UP006, UP007
-    field6: Set[float]  # noqa: UP006
+    field3: List[Optional[str]]
+    field4: Dict[str, int]
+    field5: Tuple[Union[bytes, str], ...]
+    field6: Set[float]
 
 
 @dataclasses.dataclass
@@ -97,9 +97,8 @@ def test_is_dict() -> None:
     assert is_dict(Dict[str, str])
     assert is_dict(Dict)
     assert not is_dict(str)
-    if sys.version_info >= (3, 9):  # pragma: >=3.9 cover
-        assert is_dict(dict[str, str])
-        assert is_dict(dict)
+    assert is_dict(dict[str, str])
+    assert is_dict(dict)
 
 
 def test_is_literal() -> None:
@@ -112,9 +111,8 @@ def test_is_list() -> None:
     assert is_list(List[str])
     assert is_list(List)
     assert not is_list(str)
-    if sys.version_info >= (3, 9):  # pragma: >=3.9 cover
-        assert is_list(list[str])
-        assert is_list(list)
+    assert is_list(list[str])
+    assert is_list(list)
 
 
 def test_is_optional() -> None:
@@ -129,18 +127,16 @@ def test_is_set() -> None:
     assert is_set(Set[str])
     assert is_set(Set)
     assert not is_set(str)
-    if sys.version_info >= (3, 9):  # pragma: >=3.9 cover
-        assert is_set(set[str])
-        assert is_set(set)
+    assert is_set(set[str])
+    assert is_set(set)
 
 
 def test_is_tuple() -> None:
     assert is_tuple(Tuple[str])
     assert is_tuple(Tuple)
     assert not is_tuple(str)
-    if sys.version_info >= (3, 9):  # pragma: >=3.9 cover
-        assert is_tuple(tuple[str])
-        assert is_tuple(tuple)
+    assert is_tuple(tuple[str])
+    assert is_tuple(tuple)
 
 
 def test_is_union() -> None:
@@ -155,10 +151,10 @@ def test_validate() -> None:
     @dataclasses.dataclass
     class _ClassA:
         field1: float
-        field2: List[Optional[str]]  # noqa: UP006, UP007
-        field3: Dict[str, int]  # noqa: UP006
-        field4: Tuple[Union[str, int], ...]  # noqa: UP006, UP007
-        field5: Set[float]  # noqa: UP006
+        field2: List[Optional[str]]
+        field3: Dict[str, int]
+        field4: Tuple[Union[str, int], ...]
+        field5: Set[float]
 
     validate(_ClassA)
 

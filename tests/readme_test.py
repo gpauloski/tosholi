@@ -20,8 +20,8 @@ class Owner:
 @dataclasses.dataclass
 class Database:
     enabled: bool
-    ports: List[int]  # noqa: UP006
-    temp_targets: Dict[str, float]  # noqa: UP006
+    ports: List[int]
+    temp_targets: Dict[str, float]
 
 
 @dataclasses.dataclass
@@ -35,7 +35,7 @@ class Config:
     title: str
     owner: Owner
     database: Database
-    servers: Dict[str, Server]  # noqa: UP006
+    servers: Dict[str, Server]
 
 
 EXAMPLE_CONFIG = Config(
