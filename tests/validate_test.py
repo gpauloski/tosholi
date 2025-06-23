@@ -57,7 +57,7 @@ def test_get_types_basic(t: Any, expected: set[Any]) -> None:
 class _ClassA:
     field1: int
     field2: str
-    field3: List[Optional[str]]
+    field3: List[Optional[str]]  # noqa: UP045
     field4: Dict[str, int]
     field5: Tuple[Union[bytes, str], ...]
     field6: Set[float]
@@ -151,7 +151,7 @@ def test_validate() -> None:
     @dataclasses.dataclass
     class _ClassA:
         field1: float
-        field2: List[Optional[str]]
+        field2: List[Optional[str]]  # noqa: UP045
         field3: Dict[str, int]
         field4: Tuple[Union[str, int], ...]
         field5: Set[float]
