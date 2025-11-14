@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import dataclasses
 import datetime
-import sys
 import types
 import typing
 from collections import defaultdict
@@ -140,11 +139,7 @@ def is_optional(t: TypeLike) -> bool:
     Reference: https://stackoverflow.com/a/76397722
     """
     origin = typing.get_origin(t)
-    if origin is typing.Union:
-        return type(None) in typing.get_args(t)
-    if (
-        sys.version_info >= (3, 10) and origin is types.UnionType
-    ):  # pragma: >=3.10 cover
+    if origin in (typing.Union, types.UnionType):
         return type(None) in typing.get_args(t)
     return False
 
@@ -177,11 +172,7 @@ def is_tuple(t: TypeLike) -> bool:
 def is_union(t: TypeLike) -> bool:
     """Check if type is union."""
     origin = typing.get_origin(t)
-    if origin is typing.Union:
-        return True
-    if (
-        sys.version_info >= (3, 10) and origin is types.UnionType
-    ):  # pragma: >=3.10 cover
+    if origin in (typing.Union, types.UnionType):
         return True
     return False
 

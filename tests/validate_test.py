@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import dataclasses
-import sys
 from typing import Any
 from typing import Dict
 from typing import List
@@ -57,7 +56,7 @@ def test_get_types_basic(t: Any, expected: set[Any]) -> None:
 class _ClassA:
     field1: int
     field2: str
-    field3: List[Optional[str]]  # noqa: UP045
+    field3: List[Optional[str]]
     field4: Dict[str, int]
     field5: Tuple[Union[bytes, str], ...]
     field6: Set[float]
@@ -119,8 +118,7 @@ def test_is_optional() -> None:
     assert is_optional(Union[str, None])
     assert is_optional(Optional[str])
     assert not is_optional(str)
-    if sys.version_info >= (3, 10):  # pragma: >=3.10 cover
-        assert is_optional(str | None)
+    assert is_optional(str | None)
 
 
 def test_is_set() -> None:
@@ -142,16 +140,15 @@ def test_is_tuple() -> None:
 def test_is_union() -> None:
     assert is_union(Union[str, int])
     assert not is_union(str)
-    if sys.version_info >= (3, 10):  # pragma: >=3.10 cover
-        assert is_union(str | int)
-        assert is_union(str | None)
+    assert is_union(str | int)
+    assert is_union(str | None)
 
 
 def test_validate() -> None:
     @dataclasses.dataclass
     class _ClassA:
         field1: float
-        field2: List[Optional[str]]  # noqa: UP045
+        field2: List[Optional[str]]
         field3: Dict[str, int]
         field4: Tuple[Union[str, int], ...]
         field5: Set[float]
