@@ -55,10 +55,12 @@ from __future__ import annotations
 import dataclasses
 from datetime import datetime
 
+
 @dataclasses.dataclass
 class Owner:
     name: str
     dob: datetime.datetime
+
 
 @dataclasses.dataclass
 class Database:
@@ -66,10 +68,12 @@ class Database:
     ports: list[int]
     temp_targets: dict[str, float]
 
+
 @dataclasses.dataclass
 class Server:
     ip: str
     role: str
+
 
 @dataclasses.dataclass
 class Config:
@@ -109,7 +113,7 @@ config = Config(
     servers={
         'alpha': Server(ip='10.0.0.1', role='frontend'),
         'beta': Server(ip='10.0.0.2', role='backend'),
-    }
+    },
 )
 
 with open('config.toml', 'wb') as f:
